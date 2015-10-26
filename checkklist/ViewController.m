@@ -43,6 +43,8 @@
     }else{
         label.text = @"";
     }
+    
+    label.textColor = self.view.tintColor;
 //    if(item.checked){
 //        cell.accessoryType = UITableViewCellAccessoryCheckmark;
 //    }else{
@@ -52,7 +54,10 @@
 
 -(void)configureTextForCell:(UITableViewCell *)cell withChecklistItem:(ChecklistItem *)item{
     UILabel *label = (UILabel *)[cell viewWithTag:1000];
-    label.text = item.text;
+    //label.text = item.text;
+    
+    //label.text = [NSString stringWithFormat:@"%ld: %@",(long)item.itemId,item.text];
+    label.text = [NSString stringWithFormat:@"%@",item.text];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,7 +89,6 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
     UINavigationController *navigationController = segue.destinationViewController;
     ItemDetailViewController *controller = (ItemDetailViewController*) navigationController.topViewController;
     controller.delegate = self;

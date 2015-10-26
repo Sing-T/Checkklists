@@ -46,13 +46,14 @@
     if(firstTime){
         Checklist *checklist = [[Checklist alloc]init];
         checklist.name = @"List";
+        checklist.iconName = @"Folder";
         [self.lists addObject:checklist];
         [self setIndexOfSelectedChecklist:0];
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"FirstTime"];
     }
 }
 -(void)registerDefaults{
-    NSDictionary *dictionary = @{@"ChecklistIndex":@-1,@"FirstTime":@YES};
+    NSDictionary *dictionary = @{@"ChecklistIndex":@-1,@"FirstTime":@YES,@"ChecklistItemId":@0};
     [[NSUserDefaults standardUserDefaults]registerDefaults:dictionary];
 }
 
@@ -75,5 +76,13 @@
 
 -(void)sortChecklists{
     [self.lists sortUsingSelector:@selector(compare:)];
+}
+
++(NSInteger)nextChecklistItemId{
+    NSUserDefaults *userDefaults =[NSUserDefaults standardUserDefaults];
+    NSInteger itemId = [userDefaults integerForKey:@"ChecklistItemId"];
+    [userDefaults setInteger:itemId +1 forKey:@"ChecklistItemId"];
+    [userDefaults synchronize];
+    return itemId;
 }
 @end

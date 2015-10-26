@@ -1,18 +1,27 @@
 //
 //  ChecklistItem.h
-//  checkklist
+//  Checklists
 //
-//  Created by 王新涛 on 3/10/15.
-//  Copyright © 2015 sin. All rights reserved.
+//  Created by Matthijs on 30-09-13.
+//  Copyright (c) 2013 Happy Bubsy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface ChecklistItem : NSObject<NSCoding>
+@interface ChecklistItem : NSObject <NSCoding>
 
-@property(nonatomic,copy)NSString *text;
-@property(nonatomic,assign)BOOL checked;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, assign) BOOL checked;
 
--(void)toggleChecked;
+
+@property(nonatomic,copy)NSDate *dueDate;
+@property(nonatomic,assign) BOOL shouldRemind;
+@property(nonatomic,assign) NSInteger itemId;
+
+- (void)toggleChecked;
+
+-(void)scheduleNotification;
+
 
 @end

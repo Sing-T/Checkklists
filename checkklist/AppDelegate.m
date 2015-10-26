@@ -24,6 +24,10 @@
     [_dataModel saveChecklists];
 }
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    //NSLog(@"didReceivedLocalNotification %@",notification);
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -31,6 +35,24 @@
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     AllListsViewController *controller = navigationController.viewControllers[0];
     controller.dataModel = _dataModel;
+    
+    //local notification
+//    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:10];
+//    UILocalNotification *localNotification = [[UILocalNotification alloc]init];
+//    
+//    localNotification.fireDate = date;
+//    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+//    localNotification.alertBody = @"2014年到了,⻢马上有钱!";
+//    localNotification.soundName = UILocalNotificationDefaultSoundName;
+//    
+//    [[UIApplication sharedApplication]scheduleLocalNotification:localNotification];
+    
+    float sysVersion=[[UIDevice currentDevice]systemVersion].floatValue;
+    if (sysVersion>=8.0) {
+        UIUserNotificationType type=UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+        UIUserNotificationSettings *setting=[UIUserNotificationSettings settingsForTypes:type categories:nil];
+        [[UIApplication sharedApplication]registerUserNotificationSettings:setting];
+    }
     
     return YES;
 }

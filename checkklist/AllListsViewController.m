@@ -106,7 +106,8 @@
     }
     Checklist *checklist = self.dataModel.lists[indexPath.row];
     cell.textLabel.text = checklist.name;
-    cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    //cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     int count = [checklist countUncheckedItems];
     if([checklist.items count] == 0){
@@ -116,6 +117,7 @@
     }else{
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Remaining",[checklist countUncheckedItems]];
     }
+    cell.imageView.image = [UIImage imageNamed:checklist.iconName];
     
     return cell;
 }
